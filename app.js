@@ -1,6 +1,6 @@
 const { program } = require('commander');
 const { prompt } = require('inquirer');
-const { addCustomer, findCustomer } = require('./model/customerModel');
+const { addCustomer, findCustomer, deleteCustomer } = require('./model/customerModel');
 
 program.version('1.0.0').description('Client')
 
@@ -63,4 +63,15 @@ program.command('find <name>')
         })
     })
 
+
+program.command('delete <id>')
+    .alias('d')
+    .description('Delete user')
+    .action((id) => {
+        deleteCustomer(id).then(cust => {
+            console.log('Customer Deleted!!')
+        }).catch(error => {
+            console.log(error)
+        })
+    })
 program.parse(process.argv);

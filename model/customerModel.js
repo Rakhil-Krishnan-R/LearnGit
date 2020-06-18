@@ -51,7 +51,20 @@ const findCustomer = async (name) => {
     }
 }
 
+const deleteCustomer = async (_id) => {
+    try {
+        const cust = await CustomerModel.findByIdAndRemove(_id);
+        if (!cust) {
+            throw 'No Customer found!!';
+        }
+        return cust;
+    } catch (errro) {
+        throw { error }
+    }
+}
+
 module.exports = {
     addCustomer,
-    findCustomer
+    findCustomer,
+    deleteCustomer
 };
